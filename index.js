@@ -26,7 +26,8 @@ app.use(
   })
 );
 app.use(passport.initialize());
-// tell passport to use cookie sessions
+// tell passport to use cookie sessions, cookie session will parse cookie and attach result to req.session
+// passport accesses req.session
 app.use(passport.session());
 
 require('./routes/authRoutes')(app)

@@ -15,6 +15,13 @@ passport.serializeUser((user, done) => {
   done(null, user.id);
 });
 
+/* 
+incoming request ->
+cookie-session extracts cookie from request -> 
+passport pulls user id out of cookie data -> 
+deserializeUser function to find user using the user id ->
+user model instance is attached to req object as req.user
+*/
 // args 1: the id we earlier stuffed into cookie is retrieved . 2: done callback to mark success
 passport.deserializeUser((id, done) => {
   User.findById(id).then(user => {

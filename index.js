@@ -1,5 +1,19 @@
 const express = require('express');
-require('./services/passport')
+const mongoose = require('mongoose');
+const keys = require('./config/keys');
+require('./models/User');
+require('./services/passport');
+
+mongoose.Promise = global.Promise;
+
+mongoose.connect(encodeURI(keys.mongoURI),{
+  useNewUrlParser:true
+},(err, client) => {
+  if (err) {
+    console.log(err);
+  }
+  console.log('Connected to Mongo');
+});
 
 const app = express();
 

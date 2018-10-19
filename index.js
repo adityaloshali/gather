@@ -1,6 +1,7 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const cookieSession = require('cookie-session');
+const bodyParser = require('body-parser');
 const passport = require('passport');
 const keys = require('./config/keys');
 require('./models/User');
@@ -17,6 +18,7 @@ mongoose.connect(encodeURI(keys.mongoURI),{
 
 const app = express();
 
+app.use(bodyParser.json());
 // enabling cookies in the app
 // max age( validity ) . 30 days in milliseconds
 app.use(
@@ -30,7 +32,8 @@ app.use(passport.initialize());
 // passport accesses req.session
 app.use(passport.session());
 
-require('./routes/authRoutes')(app)
+require('./routes/authRoutes')(app);
+require('./routes/billingRoutes')(app);
 
 const PORT = process.env.PORT || 5000;
 

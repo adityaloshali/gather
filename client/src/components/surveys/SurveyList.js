@@ -4,7 +4,7 @@ import actions from '../../redux/actions';
 
 class SurveyList extends Component {
   componentDidMount() {
-    actions.fetchSurveys();
+    this.props.fetchSurveys();
   }
 
   renderSurveys() {
@@ -42,4 +42,4 @@ function mapStateToProps({ surveys }) {
   return { surveys };
 }
 
-export default connect(mapStateToProps, null)(SurveyList);
+export default connect(mapStateToProps, actions)(SurveyList);
